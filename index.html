@@ -139,7 +139,7 @@ var markers = L.markerClusterGroup({disableClusteringAtZoom: 16});
    popupAnchor:  [-1, -39] // point from which the popup should open relative to the iconAnchor
 });}
                 
-      var marker = L.marker([row.lat, row.lon], {icon: iconemarker}).bindPopup("<b>LAT:</b> " + row.lat + "<br /><b>LON:</b> " + row.lon + "<br /><b>ENODEB:</b> " + enb + "<br /><b>SETTORE:</b> " + sec + "<br /><b>BANDE:</b> " + band.fontcolor(colorebande) + "<br /><b>LAC:</b> " + row.area + "<br />").openPopup();
+      var marker = L.marker([row.lat, row.lon], {icon: iconemarker}).bindPopup("<b>LAT:</b> " + row.lat + "<br /><b>LON:</b> " + row.lon + "<br /><b>ENODEB:</b> " + enb + "<br /><b>SETTORE:</b> " + sec + "<br /><b>BANDA:</b> " + band.fontcolor(colorebande) + "<br /><b>LAC:</b> " + row.area + "<br />").openPopup();
       marker.bindTooltip("<span>" + enb + ":" + sec + "</span>" , {permanent: true, direction: 'bottom'}).openTooltip();
 	    
    markers.addLayer(marker); //Aggiungo il layer della mappa a quello dei cluster

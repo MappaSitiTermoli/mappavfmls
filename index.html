@@ -138,42 +138,24 @@ var markers = L.markerClusterGroup({disableClusteringAtZoom: 16});
    iconAnchor:   [13, 41], // point of the icon which will correspond to marker's location
    popupAnchor:  [-1, -39] // point from which the popup should open relative to the iconAnchor
 });}
-                
-      var marker = L.marker([row.lat, row.lon], {icon: iconemarker}).bindPopup("<b>RADIO:</b> " + row.radio + "<br /><b>LAT:</b> " + row.lat + "<br /><b>LON:</b> " + row.lon + "<br /><b>ENODEB:</b> " + enb + "<br /><b>SETTORE:</b> " + sec + "<br /><b>BANDA:</b> " + band.fontcolor(colorebande) + "<br /><b>LAC:</b> " + row.area + "<br /><b>PCI:</b> " + row.unit + "<br />").openPopup();
-      marker.bindTooltip("<span>" + enb + ":" + sec + "</span>" , {permanent: true, direction: 'bottom'}).openTooltip();
-	    
-   markers.addLayer(marker); //Aggiungo il layer della mappa a quello dei cluster
-
-        map.addLayer(markers);  }
-
-  });
-	  $.get('./dataumts.csv', function(csvString) {
-
-    // Use PapaParse to convert string to array of objects
-    var data = Papa.parse(csvString, {header: true, dynamicTyping: true}).dataumts;
-
-    // For each row in data, create a marker and add it to the map
-    // For each row, columns `Latitude`, `Longitude`, and `Title` are required
-    for (var i in data) {
-      var row = data[i];
-	
-    
-    
-      var iconemarker = L.icon({
+          if(row.radio == "LTE" ) {      
+      var marker = L.marker([row.lat, row.lon], {icon: iconemarker}).bindPopup("<b>RADIO:</b> " + row.radio + "<br /><b>LAT:</b> " + row.lat + "<br /><b>LON:</b> " + row.lon + "<br /><b>ENODEB:</b> " + enb + "<br /><b>CELL ID:</b> " + row.cell + "<br /><b>SETTORE:</b> " + sec + "<br /><b>BANDA:</b> " + band.fontcolor(colorebande) + "<br /><b>LAC:</b> " + row.area + "<br /><b>PCI:</b> " + row.unit + "<br />").openPopup();
+      marker.bindTooltip("<span>" + enb + ":" + sec + "</span>" , {permanent: true, direction: 'bottom'}).openTooltip(); } else if(row.radio == "UMTS" || row.radio == "GSM") {
+	      iconemarker = L.icon({
     iconUrl: 'default.png',
    iconSize:     [26, 42], // size of the icon
    iconAnchor:   [13, 41], // point of the icon which will correspond to marker's location
    popupAnchor:  [-1, -39] // point from which the popup should open relative to the iconAnchor
 });
-                
       var marker = L.marker([row.lat, row.lon], {icon: iconemarker}).bindPopup("<b>RADIO:</b> " + row.radio + "<br /><b>LAT:</b> " + row.lat + "<br /><b>LON:</b> " + row.lon + "<br /><b>CELL ID:</b> " + row.cell + "<br /><b>LAC:</b> " + row.area + "<br /><b>PCI:</b> " + row.unit + "<br />").openPopup();
-      marker.bindTooltip("<span>" + row.cell + "</span>" , {permanent: true, direction: 'bottom'}).openTooltip();
+      marker.bindTooltip("<span>" + row.cell   + "</span>" , {permanent: true, direction: 'bottom'}).openTooltip(); }
 	    
    markers.addLayer(marker); //Aggiungo il layer della mappa a quello dei cluster
 
         map.addLayer(markers);  }
 
   });
+	 
 	  //Creazione del pulsante per eliminare il marker di ricerca
         let btn = document.createElement('button');
         btn.innerText = 'Delete Marker';
